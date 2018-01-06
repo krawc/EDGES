@@ -1,6 +1,56 @@
+.comments-area{
+	max-height: 0vh;
+	overflow: hidden;
+	transition: max-height 0.5s linear;
+	padding: 10px;
+	&.toggled{
+		max-height: 200vh;
+	}
+}
+
+.comment-list{
+	a{
+		text-decoration: none;
+	}
+	.comment{
+		padding: 1em;
+		border: 1px solid #ccc;
+	}
+	.comment-meta{
+		font-weight: 300;
+		color: #aaa;
+		.avatar{
+			display: none;
+		}
+		.comment-metadata a{
+			color: #aaa;
+		}
+	}
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.comments-opener{
+	text-align: center;
+	button{
+		padding: 0.5em 1.5em;
+		font-size: 1em;
+	}
+}
+
 .comment-content a {
 	word-wrap: break-word;
 }
 .bypostauthor {
 	display: block;
+}
+
+@media screen and (min-width: 37.5em){
+	.comments-area{
+		padding: 0px;
+	}
+	.comments-content{
+		padding: 0px;
+	}
 }

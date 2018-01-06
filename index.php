@@ -18,6 +18,7 @@ get_header(); ?>
 <div class="full-post-wrapper">
 	<div class="full-post-slider">
 		<?php
+
 				// The Query
 				$articles = new WP_Query(array('posts_per_page' => 3));
 
@@ -49,13 +50,21 @@ get_header(); ?>
 </div> -->
 </div>
 <!-- the slider -->
-		<main id="main" class="site-main">
+		<main id="main" class="site-main ajax_posts">
 
 			<h2 class="main-content--header">NEWS</h2>
 			<div class="index-post--container">
 			<?php
-					// The Query
-					$articles = new WP_Query(array('posts_per_page' => 6));
+					$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
+					$postsPerPage = 9;
+					$args=array(
+					   'post_type'              => 'post',
+					   'posts_per_page'         => $postsPerPage,
+					   'orderby'                => 'date',
+					   'paged'                  => $paged
+					);
+
+					$articles = new WP_Query($args);
 
 					// The Loop
 					if ( $articles->have_posts() ) {
@@ -70,18 +79,17 @@ get_header(); ?>
 
 
 						endwhile;
+						wp_reset_postdata();
+
 					} else {
 						// no posts found
 					}
+					?>
 
-					// Restore original Post Data
-					wp_reset_postdata();
-
-			?>
 		</div>
 		</main><!-- #main -->
+		<p class="more-posts"><button><?php _e('SEE MORE', 'edges'); ?></button></p>
 	</div><!-- #primary -->
 
 <?php
-//get_sidebar();
 get_footer();

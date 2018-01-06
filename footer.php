@@ -17,6 +17,7 @@
 		<div class="site-info">
 			<h1 class="footer--title"><?php echo get_bloginfo( 'name' );?></h1>
 		</div><!-- .site-info -->
+		<?php edges_social(); ?>
 	</footer><!-- #colophon -->
 </div><!-- #page -->
 

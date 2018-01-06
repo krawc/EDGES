@@ -129,11 +129,18 @@ function edges_scripts() {
 
 	wp_enqueue_script( 'edges-slick', get_template_directory_uri() . '/slick/slick.min.js', array(), '20151215', true );
 
-	wp_enqueue_script( 'edges-slick-settings', get_template_directory_uri() . '/js/slickSettings.js', array(), '20151215', true );
+	wp_enqueue_script( 'edges-settings', get_template_directory_uri() . '/js/settings.js', array(), '20151215', true );
+
+	wp_enqueue_script( 'edges-slick-myloadmore', get_template_directory_uri() . '/js/myloadmore.js', array(), '20151215', true );
+
+	wp_enqueue_script( 'edges-slick-waypoints', get_template_directory_uri() . '/js/jquery.waypoints.min.js', array(), '20151215', true );
+
+	wp_enqueue_script( 'edges-slick-infinite', get_template_directory_uri() . '/js/infinite.min.js', array(), '20151215', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );
 	}
+
 }
 add_action( 'wp_enqueue_scripts', 'edges_scripts' );
 
@@ -196,3 +203,163 @@ if (defined('FW')):
 else:
     require get_template_directory() . '/framework/bootstrap.php';
 endif;
+
+function edges_social(){
+
+	$fb = get_theme_mod('sm-link-fb');
+	$tt = get_theme_mod('sm-link-tt');
+	$ig = get_theme_mod('sm-link-ig');
+	$pi = get_theme_mod('sm-link-pi');
+	$li = get_theme_mod('sm-link-li');
+	$wa = get_theme_mod('sm-link-wa');
+	$sc = get_theme_mod('sm-link-sc');
+
+
+	$output = '';
+	$output .= '<ul class="social">';
+	if ( !empty($fb) ){
+		$output .= '<li class="social-single"><a class="social-single--link" href="'.$fb.'"><i class="ion ion-social-facebook"></i></a></li>';
+	}
+	if ( !empty($tt) ){
+		$output .= '<li class="social-single"><a class="social-single--link" href="'.$tt.'"><i class="ion ion-social-twitter"></i></a></li>';
+	}
+	if ( !empty($ig) ){
+		$output .= '<li class="social-single"><a class="social-single--link" href="'.$ig.'"><i class="ion ion-social-instagram"></i></a></li>';
+	}
+	if ( !empty($pi) ){
+		$output .= '<li class="social-single"><a class="social-single--link" href="'.$pi.'"><i class="ion ion-social-pinterest"></i></a></li>';
+	}
+	if ( !empty($li) ){
+		$output .= '<li class="social-single"><a class="social-single--link" href="'.$li.'"><i class="ion ion-social-linkedin"></i></a></li>';
+	}
+	if ( !empty($wa) ){
+		$output .= '<li class="social-single"><a class="social-single--link" href="'.$wa.'"><i class="ion ion-social-whatsapp"></i></a></li>';
+	}
+	if ( !empty($sc) ){
+		$output .= '<li class="social-single"><a class="social-single--link" href="'.$sc.'"><i class="ion ion-social-snapchat"></i></a></li>';
+	}
+	$output .= '</ul>';
+	echo $output;
+}
+
+/**
+ * Retrieve the archive title based on the queried object.
+ *
+ * @since 4.1.0
+ *
+ * @return string Archive title.
+ */
+function edges_get_the_archive_title() {
+	if ( is_category() ) {
+		/* translators: Category archive title. 1: Category name */
+		$title = sprintf( __( '%s' ), single_cat_title( '', false ) );
+	} elseif ( is_tag() ) {
+		/* translators: Tag archive title. 1: Tag name */
+		$title = sprintf( __( '%s' ), single_tag_title( '', false ) );
+	} elseif ( is_author() ) {
+		/* translators: Author archive title. 1: Author name */
+		$title = sprintf( __( '%s' ), '<span class="vcard">' . get_the_author() . '</span>' );
+	} elseif ( is_year() ) {
+		/* translators: Yearly archive title. 1: Year */
+		$title = sprintf( __( '%s' ), get_the_date( _x( 'Y', 'yearly archives date format' ) ) );
+	} elseif ( is_month() ) {
+		/* translators: Monthly archive title. 1: Month name and year */
+		$title = sprintf( __( '%s' ), get_the_date( _x( 'F Y', 'monthly archives date format' ) ) );
+	} elseif ( is_day() ) {
+		/* translators: Daily archive title. 1: Date */
+		$title = sprintf( __( '%s' ), get_the_date( _x( 'F j, Y', 'daily archives date format' ) ) );
+	} elseif ( is_tax( 'post_format' ) ) {
+		if ( is_tax( 'post_format', 'post-format-aside' ) ) {
+			$title = _x( 'Asides', 'post format archive title' );
+		} elseif ( is_tax( 'post_format', 'post-format-gallery' ) ) {
+			$title = _x( 'Galleries', 'post format archive title' );
+		} elseif ( is_tax( 'post_format', 'post-format-image' ) ) {
+			$title = _x( 'Images', 'post format archive title' );
+		} elseif ( is_tax( 'post_format', 'post-format-video' ) ) {
+			$title = _x( 'Videos', 'post format archive title' );
+		} elseif ( is_tax( 'post_format', 'post-format-quote' ) ) {
+			$title = _x( 'Quotes', 'post format archive title' );
+		} elseif ( is_tax( 'post_format', 'post-format-link' ) ) {
+			$title = _x( 'Links', 'post format archive title' );
+		} elseif ( is_tax( 'post_format', 'post-format-status' ) ) {
+			$title = _x( 'Statuses', 'post format archive title' );
+		} elseif ( is_tax( 'post_format', 'post-format-audio' ) ) {
+			$title = _x( 'Audio', 'post format archive title' );
+		} elseif ( is_tax( 'post_format', 'post-format-chat' ) ) {
+			$title = _x( 'Chats', 'post format archive title' );
+		}
+	} elseif ( is_post_type_archive() ) {
+		/* translators: Post type archive title. 1: Post type name */
+		$title = sprintf( __( '%s' ), post_type_archive_title( '', false ) );
+	} elseif ( is_tax() ) {
+		$tax = get_taxonomy( get_queried_object()->taxonomy );
+		/* translators: Taxonomy term archive title. 1: Taxonomy singular name, 2: Current taxonomy term */
+		$title = sprintf( __( '%1$s: %2$s' ), $tax->labels->singular_name, single_term_title( '', false ) );
+	} else {
+		$title = __( 'Archives' );
+	}
+
+	/**
+	 * Filters the archive title.
+	 *
+	 * @since 4.1.0
+	 *
+	 * @param string $title Archive title to be displayed.
+	 */
+	return apply_filters( 'edges_get_the_archive_title', $title );
+}
+
+add_action( 'customize_register', 'starter_customize_register');
+
+function starter_customize_register( $wp_customize )
+{
+	//SECTIONS:
+	$wp_customize->add_section( 'footer_new_section_name' , array(
+	        'title'    => __( 'Footer & Social Media', 'listify-child' ),
+	) );
+
+	$wp_customize->add_setting( 'sm-link-fb' );
+	$wp_customize->add_setting( 'sm-link-tt' );
+	$wp_customize->add_setting( 'sm-link-ig' );
+	$wp_customize->add_setting( 'sm-link-pi' );
+	$wp_customize->add_setting( 'sm-link-li' );
+	$wp_customize->add_setting( 'sm-link-wa' );
+	$wp_customize->add_setting( 'sm-link-sc' );
+
+	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'sm-link-fb', array(
+	        'label'    => __( 'Add Facebook link', 'edges' ),
+	        'section'  => 'footer_new_section_name',
+	        'settings' => 'sm-link-fb'
+	    ) ) );
+	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'sm-link-tt', array(
+	        'label'    => __( 'Add Twitter link', 'edges' ),
+	        'section'  => 'footer_new_section_name',
+	        'settings' => 'sm-link-tt'
+	    ) ) );
+	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'sm-link-ig', array(
+	        'label'    => __( 'Add Instagram link', 'edges' ),
+	        'section'  => 'footer_new_section_name',
+	        'settings' => 'sm-link-ig'
+	    ) ) );
+	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'sm-link-pi', array(
+	        'label'    => __( 'Add Pinterest link', 'edges' ),
+	        'section'  => 'footer_new_section_name',
+	        'settings' => 'sm-link-pi'
+	    ) ) );
+	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'sm-link-li', array(
+	        'label'    => __( 'Add LinkedIn link', 'edges' ),
+	        'section'  => 'footer_new_section_name',
+	        'settings' => 'sm-link-li'
+	    ) ) );
+	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'sm-link-wa', array(
+	        'label'    => __( 'Add WhatsApp link', 'edges' ),
+	        'section'  => 'footer_new_section_name',
+	        'settings' => 'sm-link-wa'
+	    ) ) );
+	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'sm-link-sc', array(
+	        'label'    => __( 'Add Snapchat link', 'edges' ),
+	        'section'  => 'footer_new_section_name',
+	        'settings' => 'sm-link-sc'
+	    ) ) );
+
+}

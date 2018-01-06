@@ -111,3 +111,30 @@
 		}
 	}( container ) );
 } )();
+
+//toggle comments_open
+
+( function() {
+	var container, button, menu, links, i, len;
+
+	container = document.getElementById( 'comments' );
+	if ( ! container ) {
+		return;
+	}
+
+	button = document.getElementById( 'commentsBtn' );
+	if ( ! container ) {
+		return;
+	}
+
+	button.onclick = function() {
+		if ( -1 !== container.className.indexOf( 'toggled' ) ) {
+			container.className = container.className.replace( ' toggled', '' );
+			button.setAttribute( 'aria-expanded', 'false' );
+		} else {
+			container.className += ' toggled';
+			button.setAttribute( 'aria-expanded', 'true' );
+		}
+	};
+
+})();

@@ -10,12 +10,12 @@
 
 	&.toggled {
 	height: 100vh;
+	.menu-container{
+		opacity: 1;
+	}
 	}
 
-	ul {
-		display: inline-block;
-		list-style: none;
-		margin: 0;
+	.menu-container{
 		padding: 3em;
 		width: 100%;
 		max-width: 37.5em;
@@ -23,6 +23,14 @@
 		opacity: 0;
 		transition: opacity 0.3s ease;
 		pointer-events: none;
+		margin: auto;
+	}
+
+	ul {
+		display: inline-block;
+		list-style: none;
+		margin: 0;
+		padding: 0;
 
 		ul {
 			box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
@@ -86,6 +94,13 @@
 	.current-menu-item > a,
 	.current_page_ancestor > a,
 	.current-menu-ancestor > a {
+	}
+}
+
+ul.social{
+	display: inline-flex;
+	li{
+		padding: 0em 0.5em;
 	}
 }
 

@@ -1,10 +1,10 @@
+// MAIN Content for pages and posts
 .site-main{
 	margin: auto;
 	width: 100%;
 	max-width: 75em;
-	margin-top: 4em;
-	margin-bottom: 4em;
 }
+
 .sticky {
 	display: block;
 }
@@ -26,4 +26,53 @@
 .page-links {
 	clear: both;
 	margin: 0 0 1.5em;
+}
+
+//posts
+
+//Content for single posts - default layout
+.single{
+	.site-main {
+		max-width: 55em;
+	}
+	.entry-title {
+		color: #000;
+		margin: 10px;
+		font-size: 2.5em;
+	}
+	.entry-meta{
+		margin: 10px;
+		span {
+		text-transform: uppercase;
+		font-weight: 300;
+		}
+		a{
+			text-decoration: none;
+		}
+	}
+}
+
+//Archive
+
+.page-title{
+	text-align: center;
+  text-transform: uppercase;
+  font-weight: 900;
+  font-size: 1.8em;
+}
+
+
+@media screen and (min-width: 37.5em){
+	.site-main{
+		margin-top: 4em;
+		margin-bottom: 4em;
+	}
+	.single{
+		.entry-title{
+			margin: 10px 0px;
+		}
+		.entry-meta{
+			margin: 5px 0px;
+		}
+	}
 }

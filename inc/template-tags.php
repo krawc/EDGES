@@ -26,7 +26,7 @@ if ( ! function_exists( 'edges_posted_on' ) ) :
 
 		$posted_on = sprintf(
 			/* translators: %s: post date. */
-			esc_html_x( 'Posted on %s', 'post date', 'edges' ),
+			esc_html_x( '%s', 'post date', 'edges' ),
 			'<a href="' . esc_url( get_permalink() ) . '" rel="bookmark">' . $time_string . '</a>'
 		);
 
@@ -52,7 +52,7 @@ if ( ! function_exists( 'edges_entry_footer' ) ) :
 			$categories_list = get_the_category_list( esc_html__( ', ', 'edges' ) );
 			if ( $categories_list ) {
 				/* translators: 1: list of categories. */
-				printf( '<span class="cat-links">' . esc_html__( 'Posted in %1$s', 'edges' ) . '</span>', $categories_list ); // WPCS: XSS OK.
+				printf( '<span class="cat-links">' . esc_html__( '%1$s', 'edges' ) . '</span>', $categories_list ); // WPCS: XSS OK.
 			}
 
 			/* translators: used between list items, there is a space after the comma */
