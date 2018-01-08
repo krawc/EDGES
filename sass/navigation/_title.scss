@@ -35,7 +35,7 @@
   .site-branding {
     text-align: center;
     .custom-logo {
-      max-width: 30vw;
+      max-width: 70vw;
       height: auto;
       transition: max-width 0.3s ease;
     }
@@ -71,5 +71,8 @@
     .custom-logo {
       max-width: 15vw;
     }
+  }
+  .custom-logo {
+    max-width: 30vw;
   }
 }

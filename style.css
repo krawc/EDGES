@@ -453,7 +453,7 @@ a {
   #masthead .site-branding {
     text-align: center; }
     #masthead .site-branding .custom-logo {
-      max-width: 30vw;
+      max-width: 70vw;
       height: auto;
       transition: max-width 0.3s ease; }
 
@@ -476,7 +476,10 @@ a {
 
 @media screen and (min-width: 37.5em) {
   #masthead.toggled .custom-logo {
-    max-width: 15vw; } }
+    max-width: 15vw; }
+
+  .custom-logo {
+    max-width: 30vw; } }
 /*--------------------------------------------------------------
 ## Menus
 --------------------------------------------------------------*/

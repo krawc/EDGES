@@ -149,8 +149,9 @@ add_action( 'wp_enqueue_scripts', 'edges_scripts' );
  */
 
 function google_fonts() {
+	$font = get_theme_mod('font');
 	$query_args = array(
-		'family' => 'Montserrat:100,300,400,700,800|Roboto:100,300,400,700,900',
+		'family' => $font.':100,300,400,700,900',
 		'subset' => 'latin,latin-ext',
 	);
 	wp_enqueue_style( 'google_fonts', add_query_arg( $query_args, "//fonts.googleapis.com/css" ), array(), null );
@@ -315,7 +316,10 @@ function starter_customize_register( $wp_customize )
 {
 	//SECTIONS:
 	$wp_customize->add_section( 'footer_new_section_name' , array(
-	        'title'    => __( 'Footer & Social Media', 'listify-child' ),
+	        'title'    => __( 'Footer & Social Media', 'edges' ),
+	) );
+	$wp_customize->add_section( 'edges_fonts_settings' , array(
+					'title'    => __( 'Fonts', 'edges' ),
 	) );
 
 	$wp_customize->add_setting( 'sm-link-fb' );
@@ -325,6 +329,10 @@ function starter_customize_register( $wp_customize )
 	$wp_customize->add_setting( 'sm-link-li' );
 	$wp_customize->add_setting( 'sm-link-wa' );
 	$wp_customize->add_setting( 'sm-link-sc' );
+	$wp_customize->add_setting( 'font', array(
+    'default'   => 'Roboto',
+) );
+
 
 	$wp_customize->add_control( new WP_Customize_Control( $wp_customize, 'sm-link-fb', array(
 	        'label'    => __( 'Add Facebook link', 'edges' ),
@@ -361,7 +369,23 @@ function starter_customize_register( $wp_customize )
 	        'section'  => 'footer_new_section_name',
 	        'settings' => 'sm-link-sc'
 	    ) ) );
-
+	$wp_customize->add_control(
+	    new WP_Customize_Control(
+	        $wp_customize,
+	        'font',
+	        array(
+	            'label'          => __( 'Main font', 'edges' ),
+	            'section'        => 'edges_fonts_settings',
+	            'settings'       => 'font',
+	            'type'           => 'select',
+	            'choices'        => array(
+	                'Roboto'   => 'Roboto',
+	                'Montserrat'  => 'Montserrat',
+									'Lato'  => 'Lato',
+	            )
+	        )
+	    )
+	);
 }
 
 function edges_the_archives_link() {
@@ -377,6 +401,28 @@ function edges_the_archives_link() {
 }
 
 function edges_preloader(){
-	$name = get_bloginfo( 'name' );
+
+	if( has_custom_logo() ) {
+		$custom_logo_id = get_theme_mod( 'custom_logo' );
+		$image = wp_get_attachment_image_src( $custom_logo_id , 'full' );
+		$name = '<img src="'.$image[0].'">';
+	} else {
+		$name = get_bloginfo( 'name' );
+	}
 	echo '<div id="preload">'.$name.'</div>';
 }
+
+function edges_customize_css()
+{
+    ?>
+         <style type="text/css">
+				 body,
+				 button,
+				 input,
+				 select,
+				 optgroup,
+				 textarea { font-family: <?php echo get_theme_mod('font'); ?>; }
+         </style>
+    <?php
+}
+add_action( 'wp_head', 'edges_customize_css');

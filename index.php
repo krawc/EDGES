@@ -42,17 +42,12 @@ get_header(); ?>
 
 		?>
 
-</div>
-
-<!-- <div class="slick-arrows">
-	<button class="slick-previous"><i class="ion ion-ios-arrow-left"></i></button>
-	<button class="slick-next"><i class="ion ion-ios-arrow-right"></i></button>
-</div> -->
+	</div>
 </div>
 <!-- the slider -->
 		<main id="main" class="site-main ajax_posts">
 
-			<h2 class="main-content--header">NEWS</h2>
+			<h2 class="main-content--header"><?php _e('NEWS', 'edges');?></h2>
 			<div class="index-post--container">
 			<?php
 					$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
