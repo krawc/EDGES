@@ -225,7 +225,7 @@ input,
 select,
 optgroup,
 textarea {
-  color: #404040;
+  color: #000;
   font-family: Roboto, sans-serif;
   font-size: 16px;
   font-size: 1rem;
@@ -412,7 +412,7 @@ a {
   a:visited {
     color: #000; }
   a:hover, a:focus, a:active {
-    color: #404040; }
+    color: #000; }
   a:focus {
     outline: thin dotted; }
   a:hover, a:active {
@@ -424,19 +424,47 @@ a {
 /*--------------------------------------------------------------
 ## Site Title formatting
 --------------------------------------------------------------*/
+#preload {
+  margin: 0px;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  z-index: 9999;
+  justify-content: center;
+  background: #000;
+  color: #fff;
+  font-size: 3em;
+  font-weight: 900; }
+
+#page {
+  height: 100vh;
+  overflow: hidden; }
+  #page.loaded {
+    height: auto;
+    overflow: auto; }
+
 .site-header {
   background: #000; }
 
-#masthead.toggled {
+#masthead {
   background: #000; }
-  #masthead.toggled .site-title a {
-    font-size: 1.5em; }
+  #masthead .site-branding {
+    text-align: center; }
+    #masthead .site-branding .custom-logo {
+      max-width: 30vw;
+      height: auto;
+      transition: max-width 0.3s ease; }
+
+#masthead.toggled .site-title a {
+  font-size: 1.5em; }
 
 .site-description, .site-title {
   background-color: #000;
   margin: 0;
   color: #fff;
-  padding: 0em 0.6em 0.6em;
+  padding: 0em 0.6em;
   text-align: center; }
 
 .site-title a {
@@ -444,9 +472,11 @@ a {
   text-decoration: none;
   font-weight: 900;
   font-size: 2.5em;
-  line-height: 0.8;
   transition: font-size 0.3s ease; }
 
+@media screen and (min-width: 37.5em) {
+  #masthead.toggled .custom-logo {
+    max-width: 15vw; } }
 /*--------------------------------------------------------------
 ## Menus
 --------------------------------------------------------------*/
@@ -462,7 +492,8 @@ a {
   .main-navigation.toggled {
     height: 100vh; }
     .main-navigation.toggled .menu-container {
-      opacity: 1; }
+      opacity: 1;
+      pointer-events: initial; }
   .main-navigation .menu-container {
     padding: 3em;
     width: 100%;
@@ -536,6 +567,18 @@ ul.social {
   float: right;
   text-align: right;
   width: 50%; }
+
+.search-form {
+  text-align: center;
+  margin-bottom: 1em; }
+  .search-form .search-field {
+    width: 70%;
+    border-radius: 0px;
+    border: none;
+    background: rgba(160, 160, 160, 0.5);
+    text-align: center; }
+  .search-form .search-submit {
+    display: none; }
 
 /*--------------------------------------------------------------
 ## Footer
@@ -691,6 +734,8 @@ ul.social {
 
 .single .site-main {
   max-width: 55em; }
+.single .entry-header img {
+  width: 100%; }
 .single .entry-title {
   color: #000;
   margin: 10px;
@@ -708,6 +753,22 @@ ul.social {
   text-transform: uppercase;
   font-weight: 900;
   font-size: 1.8em; }
+
+.pagination {
+  width: 100%;
+  text-align: center;
+  margin: 1.5em 0em 0.5em; }
+  .pagination .page-numbers {
+    padding: 10px;
+    line-height: 40px;
+    border: 1px solid #ccc; }
+
+.not-found {
+  min-height: 100vh; }
+  .not-found .page-content {
+    text-align: center;
+    padding: 0.5em;
+    margin-top: 0px; }
 
 @media screen and (min-width: 37.5em) {
   .site-main {
@@ -745,18 +806,25 @@ ul.social {
       height: 100%;
       object-fit: cover;
       filter: brightness(70%); }
-    .full-post-wrapper .full-post.slick-slide .full-post--title {
-      margin: 0;
+    .full-post-wrapper .full-post.slick-slide .full-post-text {
       position: absolute;
       width: 100%;
       text-align: center;
-      bottom: 20%;
-      font-size: 3.5em; }
+      bottom: 20%; }
+    .full-post-wrapper .full-post.slick-slide .full-post--title {
+      margin: 0;
+      font-size: 2em; }
       .full-post-wrapper .full-post.slick-slide .full-post--title a {
         color: #fff;
         text-decoration: none;
         text-transform: uppercase;
         font-weight: 900; }
+    .full-post-wrapper .full-post.slick-slide .full-post--excerpt {
+      text-align: center;
+      font-size: 1.3em;
+      font-weight: 100;
+      width: 100%;
+      color: #fff; }
 
 .site-main .main-content--header {
   text-align: center; }
@@ -811,12 +879,12 @@ ul.social {
     -ms-flex-direction: column;
     flex-direction: column; }
     .index-post--container .index-post .index-post--category {
-      margin: 0.5em 0em;
+      margin: 0.5em 0em 0em;
       text-transform: uppercase;
       font-weight: 300;
       letter-spacing: 1px; }
     .index-post--container .index-post .index-post--title {
-      margin: 0.2em 0em;
+      margin: 0em 0em 1.5em;
       color: #000; }
     .index-post--container .index-post .index-post-thumb {
       width: 100vw;
@@ -826,10 +894,15 @@ ul.social {
 .more-posts {
   text-align: center;
   margin-bottom: 2em; }
+  .more-posts a {
+    text-decoration: none; }
 
 @media screen and (min-width: 50em) {
   .full-post {
     height: calc(100vh - 144px); }
+
+  .full-post-wrapper .full-post.slick-slide .full-post--title {
+    font-size: 3.5em; }
 
   .index-post--container .index-post {
     -webkit-flex-basis: 33.33%;

@@ -35,6 +35,9 @@
 	.site-main {
 		max-width: 55em;
 	}
+	.entry-header img{
+		width: 100%;
+	}
 	.entry-title {
 		color: #000;
 		margin: 10px;
@@ -54,15 +57,36 @@
 
 //Archive
 
-.page-title{
+.page-title {
 	text-align: center;
   text-transform: uppercase;
   font-weight: 900;
   font-size: 1.8em;
 }
 
+//pagination
 
-@media screen and (min-width: 37.5em){
+.pagination {
+	width: 100%;
+  text-align: center;
+  margin: 1.5em 0em 0.5em;
+	.page-numbers{
+		padding: 10px;
+		line-height: 40px;
+		border: 1px solid #ccc;
+	}
+}
+
+.not-found {
+	min-height: 100vh;
+	.page-content{
+		text-align: center;
+		padding: 0.5em;
+		margin-top: 0px;
+	}
+}
+
+@media screen and (min-width: 37.5em) {
 	.site-main{
 		margin-top: 4em;
 		margin-bottom: 4em;

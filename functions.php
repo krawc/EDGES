@@ -150,7 +150,7 @@ add_action( 'wp_enqueue_scripts', 'edges_scripts' );
 
 function google_fonts() {
 	$query_args = array(
-		'family' => 'Roboto:100,300,400,700,900',
+		'family' => 'Montserrat:100,300,400,700,800|Roboto:100,300,400,700,900',
 		'subset' => 'latin,latin-ext',
 	);
 	wp_enqueue_style( 'google_fonts', add_query_arg( $query_args, "//fonts.googleapis.com/css" ), array(), null );
@@ -362,4 +362,21 @@ function starter_customize_register( $wp_customize )
 	        'settings' => 'sm-link-sc'
 	    ) ) );
 
+}
+
+function edges_the_archives_link() {
+    $archive_page = get_posts(
+        array(
+						'post_type' => 'page',
+						'meta_key' => '_wp_page_template',
+						'meta_value' => 'all.php'
+        )
+    );
+    $archive_id = $archive_page[0]->ID;
+    echo get_permalink( $archive_id );
+}
+
+function edges_preloader(){
+	$name = get_bloginfo( 'name' );
+	echo '<div id="preload">'.$name.'</div>';
 }

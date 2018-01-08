@@ -22,14 +22,21 @@
 
 <body <?php body_class(); ?>>
 <div id="page" class="site">
+	<?php edges_preloader(); ?>
+
 	<a class="skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'edges' ); ?></a>
 
 	<header id="masthead" class="site-header">
 		<div class="site-branding">
 			<?php
-			the_custom_logo();?>
+			if(has_custom_logo()) {
+				the_custom_logo();
+			} else {
+				?>
 				<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
 				<?php
+			}
+
 			$description = get_bloginfo( 'description', 'display' );
 			if ( $description || is_customize_preview() ) : ?>
 				<p class="site-description"><?php echo $description; /* WPCS: xss ok. */ ?></p>
@@ -41,6 +48,7 @@
 			<button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false"><i class="ion ion-drag"></i></button>
 				<div class="menu-container">
 					<?php
+						get_search_form();
 						wp_nav_menu( array(
 							'theme_location' => 'menu-1',
 							'menu_id'        => 'primary-menu',

@@ -21,6 +21,7 @@ get_header(); ?>
 					printf( esc_html__( 'Search Results for: %s', 'edges' ), '<span>' . get_search_query() . '</span>' );
 				?></h1>
 			</header><!-- .page-header -->
+			<div class="index-post--container">
 
 			<?php
 			/* Start the Loop */
@@ -31,12 +32,12 @@ get_header(); ?>
 				 * If you want to overload this in a child theme then include a file
 				 * called content-search.php and that will be used instead.
 				 */
-				get_template_part( 'template-parts/content', 'search' );
+				get_template_part( 'template-parts/content', 'index' );
 
 			endwhile;
-
-			the_posts_navigation();
-
+			?>
+		</div>
+			<?php
 		else :
 
 			get_template_part( 'template-parts/content', 'none' );
@@ -47,5 +48,4 @@ get_header(); ?>
 	</section><!-- #primary -->
 
 <?php
-get_sidebar();
 get_footer();

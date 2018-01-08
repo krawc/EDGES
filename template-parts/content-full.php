@@ -11,5 +11,8 @@
 
 	<article id="post-<?php the_ID(); ?>" class="full-post">
 		<a href="<?php the_permalink(); ?>"><img class="full-post-thumb" src="<?php echo get_the_post_thumbnail_url(); ?>"></a>
-		<h1 class="full-post--title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
+		<div class="full-post-text">
+			<h1 class="full-post--title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h1>
+			<p class="full-post--excerpt"><?php echo get_the_excerpt(); ?></p>
+		</div>
 	</article><!-- #post-<?php the_ID(); ?> -->

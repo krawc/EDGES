@@ -2,13 +2,47 @@
 ## Site Title formatting
 --------------------------------------------------------------*/
 
+#preload {
+  margin: 0px;
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  z-index: 9999;
+  justify-content: center;
+  background: #000;
+  color: #fff;
+  font-size: 3em;
+  font-weight: 900;
+}
+
+#page{
+  height: 100vh;
+  overflow: hidden;
+  &.loaded{
+    height: auto;
+    overflow: auto;
+  }
+}
+
 .site-header{
   background: #000;
 }
 
-#masthead.toggled{
-  // height: 100vh; // To make it expand full window height
+#masthead {
   background: #000;
+  .site-branding {
+    text-align: center;
+    .custom-logo {
+      max-width: 30vw;
+      height: auto;
+      transition: max-width 0.3s ease;
+    }
+  }
+}
+
+#masthead.toggled{
   .site-title{
     a{
       font-size: 1.5em;
@@ -19,7 +53,7 @@
   background-color: #000;
   margin: 0;
   color: #fff;
-  padding: 0em 0.6em 0.6em;
+  padding: 0em 0.6em;
   text-align: center;
 }
 .site-title{
@@ -28,7 +62,14 @@
     text-decoration: none;
     font-weight: 900;
     font-size: 2.5em;
-    line-height: 0.8;
     transition: font-size 0.3s ease;
+  }
+}
+
+@media screen and (min-width: 37.5em) {
+  #masthead.toggled{
+    .custom-logo {
+      max-width: 15vw;
+    }
   }
 }

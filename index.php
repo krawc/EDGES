@@ -88,7 +88,7 @@ get_header(); ?>
 
 		</div>
 		</main><!-- #main -->
-		<p class="more-posts"><button><?php _e('SEE MORE', 'edges'); ?></button></p>
+		<p class="more-posts"><button><a href="<?php edges_the_archives_link(); ?>"><?php _e('SEE MORE', 'edges'); ?></a></button></p>
 	</div><!-- #primary -->
 
 <?php

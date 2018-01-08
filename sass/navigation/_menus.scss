@@ -12,6 +12,7 @@
 	height: 100vh;
 	.menu-container{
 		opacity: 1;
+		pointer-events: initial;
 	}
 	}
 
@@ -139,5 +140,19 @@ ul.social{
 		float: right;
 		text-align: right;
 		width: 50%;
+	}
+}
+.search-form {
+	text-align: center;
+	margin-bottom: 1em;
+	.search-field {
+		width: 70%;
+		border-radius: 0px;
+		border: none;
+		background: rgba(160, 160, 160, 0.5);
+		text-align: center;
+	}
+	.search-submit {
+		display: none;
 	}
 }
